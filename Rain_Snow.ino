@@ -6,6 +6,8 @@ Light up a random Led in Blue or White and fade out.
 
 // include FastLED library.
 #include "FastLED.h"
+// include Power library
+#include <avr/power.h>
  
 // Fixed definitions
 #define DATA_PIN 6                                        
@@ -35,7 +37,9 @@ int n = 0;
 void setup() {
   // Power-up safety delay or something like that.
   delay(1000);                                                
-  Serial.begin(57600);
+  Serial.begin(9600);
+  // To make it work w/ an 8 Mhz proc (example : Lilypad Arduino)
+  clock_prescale_set(clock_div_2);
 
   // Use this for WS2801 Leds
   //  LEDS.addLeds<LED_TYPE, DATA_PIN, CLOCK_PIN, COLOR_ORDER>(leds, NUM_LEDS);
